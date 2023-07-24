@@ -3,9 +3,12 @@
 Replace the directory with your own desired directory
 
 Note: Make sure that your docker service is running
+This is the initial command I was running 
 ```
 docker run --name doll-jenkins --detach -p 8080:8080 -p 50000:50000 --restart=on-failure -v jenkins_home:/var/jenkins_home jenkins/jenkins 
 ```
+This is the commands I've used to be able to use docker on jenkins
+This is also available from the jenkins official docs
 ```
 docker run --name jenkins-docker --rm --detach   --privileged --network jenkins --network-alias docker   --env DOCKER_TLS_CERTDIR=/certs   --volume jenkins-docker-certs:/certs/client   --volume jenkins_home:/var/jenkins_home   --publish 2376:2376   docker:dind
 docker run --name jenkins-myjenkins --restart=on-failure --detach   --network jenkins --env DOCKER_HOST=tcp://docker:2376   --env DOCKER_CERT_PATH=/certs/client --env DOCKER_TLS_VERIFY=1   --publish 8080:8080 --publish 50000:50000   --volume jenkins_home:/var/jenkins_home   --volume jenkins-docker-certs:/certs/client:ro   myjenkins:2.401.2-1
@@ -58,5 +61,5 @@ it wrong?
 - [Installing Jenkins on Docker](https://www.jenkins.io/doc/book/installing/docker/)
   - You can also refer to this. However it was overwhelming to me so I didn't follow it.
   - As I move forward I've picked up some of the things from this reference. The one where you enable running docker command in the jenkins image
-  - I've also ended up following the params regarding certs. Since from my build it indicated https error. Even thogh I didn't understand it quite fully
+  - I've also ended up following the params regarding certs. Since from my build it indicated https error. Even though I didn't understand it quite fully
 - [docker on docker](http://jpetazzo.github.io/2015/09/03/do-not-use-docker-in-docker-for-ci/)
