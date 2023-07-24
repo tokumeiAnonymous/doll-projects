@@ -1,8 +1,6 @@
 ### To run the jenkins container
 
-Replace the directory with your own desired directory
-
-Note: Make sure that your docker service is running
+Note: Make sure that your docker service is running \
 This is the initial command I was running 
 ```
 docker run --name doll-jenkins --detach -p 8080:8080 -p 50000:50000 --restart=on-failure -v jenkins_home:/var/jenkins_home jenkins/jenkins 
@@ -40,9 +38,16 @@ docker container rm container_name|container_id
 
 
 ### Creating the pipeline build for your application
-Fork the repo [simple-java-maven-app](https://github.com/jenkins-docs/simple-java-maven-app)
-
-o
+- Fork the repo [simple-java-maven-app](https://github.com/jenkins-docs/simple-java-maven-app)
+- Create a Pipeline
+- Proceed with the configuration
+- Select `Pipeline script from SCM` and paste the url of the forked repo
+- Used your created github credentials. If you haven't created yet you can create here as well
+- Make sure to point the Script Path to your `Jenkinsfile`
+- Then save
+- Test the build
+- If you encounter any error it is worth checking 
+out the logs or console output to debug
 
 ### Questions
 - What are the different use cases for ssh key, gpg key, and deploy key as credentials?
