@@ -6,16 +6,16 @@ Note: Make sure that your docker service is running
 ```
 docker run --name doll-jenkins --detach -p 8080:8080 -p 50000:50000 --restart=on-failure -v jenkins_home:/var/jenkins_home jenkins/jenkins 
 ```
+```
+docker run --name jenkins-docker --rm --detach   --privileged --network jenkins --network-alias docker   --env DOCKER_TLS_CERTDIR=/certs   --volume jenkins-docker-certs:/certs/client   --volume jenkins_home:/var/jenkins_home   --publish 2376:2376   docker:dind
+docker run --name jenkins-myjenkins --restart=on-failure --detach   --network jenkins --env DOCKER_HOST=tcp://docker:2376   --env DOCKER_CERT_PATH=/certs/client --env DOCKER_TLS_VERIFY=1   --publish 8080:8080 --publish 50000:50000   --volume jenkins_home:/var/jenkins_home   --volume jenkins-docker-certs:/certs/client:ro   myjenkins:2.401.2-1
+```
 
 ### To stop the jenkins container
 
 ```
 docker ps # Copy the name or id for the jenkins container
 docker stop container_name|container_id
-```
-```
-docker run --name jenkins-docker --rm --detach   --privileged --network jenkins --network-alias docker   --env DOCKER_TLS_CERTDIR=/certs   --volume jenkins-docker-certs:/certs/client   --volume jenkins_home:/var/jenkins_home   --publish 2376:2376   docker:dind
-docker run --name jenkins-myjenkins --restart=on-failure --detach   --network jenkins --env DOCKER_HOST=tcp://docker:2376   --env DOCKER_CERT_PATH=/certs/client --env DOCKER_TLS_VERIFY=1   --publish 8080:8080 --publish 50000:50000   --volume jenkins_home:/var/jenkins_home   --volume jenkins-docker-certs:/certs/client:ro   myjenkins:2.401.2-1
 ```
 
 
